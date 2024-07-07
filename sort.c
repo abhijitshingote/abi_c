@@ -1,23 +1,28 @@
 #include <stdio.h>
 
-#define MAXLINE 5
+#define MAXLINE 500
 #define BUFFER_SIZE 5000
 static char buffer[BUFFER_SIZE];
 static char *p=buffer;
 int get_line(char s[],int lim);
 void copy_line_to_buffer(char *point,char currentline[]);
 char *alloc(int len);
+char *lineptr[BUFFER_SIZE];
 
 int main() {
     char currentline[MAXLINE];
     int length;
     char *point;
     // printf("Hello World");
+    int linecnt=0;
     while ((length=get_line(currentline,MAXLINE))>0 && (point=alloc(length))!=0)
     {
         copy_line_to_buffer(point,currentline);
+        lineptr[linecnt++]=point;
     }
-    printf("%s",buffer);
+    // printf("%s",buffer);
+    printf("%s",lineptr[2]);
+    
     
 }
 
@@ -55,7 +60,7 @@ int get_line(char s[], int lim)
         ++i;
     }
     s[i] = '\0';
-    return i;
+    return i+1;
     
 }
 
